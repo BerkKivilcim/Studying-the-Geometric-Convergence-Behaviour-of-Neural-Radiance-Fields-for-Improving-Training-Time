@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/train.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+            "reconstruction", // if changed the name of the method, also change it here!
+            "--data", "E:/Berk/code/reconstruction/data/nerfstudio/poster",
+            //"--data", "E:/Berk/code/reconstruction/data/blender/lego",
+            "--max-num-iterations", "30000",
+            //"--pipeline.model.depth_method", "expected",
+            //Inside Model Parameters
+            /////////////////////////////////////////////////////////////////////////////
+            "--pipeline.model.voxel_resolution", "250", 
+            "--pipeline.model.converge_threshold", "0.0001",
+
+            "--pipeline.output_export_dir", "E:/Berk/code/reconstruction/outputs",
+            "--pipeline.early_stop", "True", 
+            "--pipeline.decrease_coarse_sampling", "False",
+            "--pipeline.datamanager.implement_masking", "True",
+
+            "--pipeline.export_point_cloud_per_sample", "False",
+            "--pipeline.export_rendered_image_per_sample", "True",
+            "--pipeline.export_voxel_arrays_per_sample", "True",
+            "--pipeline.sample_percentage_train_image_rendering", "0.05", //sampling percentage of how many images from training dataset will be rendered to depth and rgb
+
+            //Deciding the extraction steps
+            "--pipeline.model.max_num_iterations_in_pipeline", "30000", //rendering, extractions and voxels ends at last step
+            "--pipeline.model.first_step", "100", //rendering, extraction and voxelization starts from first step, 
+            "--pipeline.model.num_partitions", "20", //total amount of extracted pointcloud and rendered images (start and end steps included)
+            ////////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////NECESSARY FOR BLENDER DATA///////////////////////////////////////////////
+            //"--pipeline.model.near-plane", "1.75", 
+            //"--pipeline.model.far-plane", "6",
+            //"blender-data",
+            ]
+        }
+    ]
+}
