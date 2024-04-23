@@ -1,0 +1,13 @@
+[project]
+name = "reconstruction"
+description = "Master thesis for studying the geometric reconstruction behaviour of NeRFs."
+version = "0.1.0"
+
+dependencies = ["nerfstudio >= 0.3.0"] 
+
+[tool.setuptools.packages.find]
+include = ["reconstruction*"]
+
+# register the entry point of your new method here:
+[project.entry-points.'nerfstudio.method_configs']
+reconstruction = 'reconstruction.reconstruction_config:Reconstruction'
